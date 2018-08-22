@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>        
+
+<head>
     <link rel="stylesheet" href="bootstrap.css">
+
+    <style>
+        .disabled {
+            background-color: gray;
+        }
+    </style>
+
+
 </head>
 
 <body>
     <div class="container">
-    <div class="form-group">
+        <div class="form-group">
             <label for="firstOperand">x</label>
-            <input type="number" id="firstOperand" class="form-control"/>
+            <input type="number" id="firstOperand" class="form-control" />
         </div>
 
         <div class="form-group">
@@ -16,6 +25,10 @@
             <button class="btn btn-default" id="multiply">*</button>
             <button class="btn btn-default" id="divide">/</button>
             <button class="btn btn-default" id="minus">-</button>
+
+            &nbsp;&nbsp;
+            <button class="btn btn-default" id="sqrt">&#8730;</button>
+            <button class="btn btn-default" id="exponent">^</button>
         </div>
 
         <div class="form-group">
@@ -29,51 +42,62 @@
 
 
         <div class="form-group">
-            <input type="text" class="form-control" id="result"  readonly/>
+            <input type="text" class="form-control" id="result" readonly/>
         </div>
 
-        
 
-    </div>    
+
+    </div>
 </body>
 <script>
-    let add = document.getElementById("add");
-    add.onclick = () => {
-        let firstOperand = document.getElementById("firstOperand").value;
-        let secondOperand = document.getElementById("secondOperand").value;
+    document.getElementById("add").onclick = () => {
+        basicOperation((x, y) => x + y);
+    };
 
-        let result = document.getElementById("result");
-        result.value = parseInt(firstOperand) + parseInt( secondOperand);
+    document.getElementById("multiply").onclick = () => {
+        basicOperation((x, y) => x * y);
+    };
+
+    document.getElementById("divide").onclick = () => {
+        basicOperation((x, y) => x / y);
+    };
+
+    document.getElementById("minus").onclick = () => {
+        basicOperation((x, y) => x - y);
+    };
+
+    document.getElementById("sqrt").onclick = () => {
+        unaryOperation((x) => Math.sqrt(x));
+    };
+
+    document.getElementById("exponent").onclick = () => {
+        basicOperation((x, y) => Math.pow(x, y));
     };
 
 
-    let multiply = document.getElementById("multiply");
-    multiply.onclick = () => {
+    let basicOperation = (operation) => {
+        resetSpecialStyling();
         let firstOperand = document.getElementById("firstOperand").value;
         let secondOperand = document.getElementById("secondOperand").value;
 
-        let result = document.getElementById("result");
-        result.value = parseInt(firstOperand) * parseInt( secondOperand);
-    };
+        document.getElementById("result").value = operation(parseInt(firstOperand), parseInt(secondOperand));
+    }
 
-
-    let divide = document.getElementById("divide");
-    divide.onclick = () => {
+    let unaryOperation = (operation) => {
         let firstOperand = document.getElementById("firstOperand").value;
-        let secondOperand = document.getElementById("secondOperand").value;
+        disableSecondOperand();
 
-        let result = document.getElementById("result");
-        result.value = parseInt(firstOperand) / parseInt( secondOperand);
-    };
+        document.getElementById("result").value = operation(parseInt(firstOperand));
+    }
 
-    let minus = document.getElementById("minus");
-    minus.onclick = () => {
-        let firstOperand = document.getElementById("firstOperand").value;
-        let secondOperand = document.getElementById("secondOperand").value;
 
-        let result = document.getElementById("result");
-        result.value = parseInt(firstOperand) - parseInt( secondOperand);
-    };
+    let disableSecondOperand = () => {
+        document.getElementById("secondOperand").classList.add("disabled");
+    }
+
+    let resetSpecialStyling = () => {
+        document.getElementById("secondOperand").classList.remove("disabled");
+    }
 
 </script>
 
