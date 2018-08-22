@@ -13,6 +13,9 @@
 
         <div class="form-group">
             <button class="btn btn-default" id="add">+</button>
+            <button class="btn btn-default" id="multiply">*</button>
+            <button class="btn btn-default" id="divide">/</button>
+            <button class="btn btn-default" id="minus">-</button>
         </div>
 
         <div class="form-group">
@@ -42,6 +45,36 @@
         let result = document.getElementById("result");
         result.value = parseInt(firstOperand) + parseInt( secondOperand);
     };
+
+
+    let multiply = document.getElementById("multiply");
+    multiply.onclick = () => {
+        let firstOperand = document.getElementById("firstOperand").value;
+        let secondOperand = document.getElementById("secondOperand").value;
+
+        let result = document.getElementById("result");
+        result.value = parseInt(firstOperand) * parseInt( secondOperand);
+    };
+
+
+    let divide = document.getElementById("divide");
+    divide.onclick = () => {
+        let firstOperand = document.getElementById("firstOperand").value;
+        let secondOperand = document.getElementById("secondOperand").value;
+
+        let result = document.getElementById("result");
+        result.value = parseInt(firstOperand) / parseInt( secondOperand);
+    };
+
+    let minus = document.getElementById("minus");
+    minus.onclick = () => {
+        let firstOperand = document.getElementById("firstOperand").value;
+        let secondOperand = document.getElementById("secondOperand").value;
+
+        let result = document.getElementById("result");
+        result.value = parseInt(firstOperand) - parseInt( secondOperand);
+    };
+
 </script>
 
 </html>
