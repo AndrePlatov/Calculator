@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>        
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+    <div class="form-group">
+            <label for="firstOperand">x</label>
+            <input type="number" id="firstOperand" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-default" id="add">+</button>
+        </div>
+
+        <div class="form-group">
+            <label for="secondOperand">y</label>
+            <input type="number" id="secondOperand" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <span class="btn btn-default">=</span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="result"  readonly/>
+        </div>
+
+        
+
+    </div>    
+</body>
+<script>
+    let add = document.getElementById("add");
+    add.onclick = () => {
+        let firstOperand = document.getElementById("firstOperand").value;
+        let secondOperand = document.getElementById("secondOperand").value;
+
+        let result = document.getElementById("result");
+        result.value = parseInt(firstOperand) + parseInt( secondOperand);
+    };
+</script>
+
+</html>
