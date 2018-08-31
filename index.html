@@ -13,6 +13,10 @@
             width: 381px;
             margin: 75px 0 0 auto;
         }
+
+        #result {
+            min-height: 125px;
+        }
     </style>
 
 
@@ -64,7 +68,8 @@
 
                 <div class="form-group row">
                     <div class="offset-1 col-11">
-                        <input type="text" class="form-control" id="result" readonly/>
+                        <input type="text" id="smallResult" class="form-control" readonly/>
+                        <textarea  class="form-control" id="result" readonly></textarea>
                     </div>
 
 
@@ -99,21 +104,41 @@
         basicOperation((x, y) => Math.pow(x, y));
     };
 
+                document.getElementById("result").value = "results starting with 10^21 will be shown using scientific notation, anything above 10^1000 will be treated as infinity";
 
     let basicOperation = (operation) => {
         resetSpecialStyling();
         let firstOperand = document.getElementById("firstOperand").value;
         let secondOperand = document.getElementById("secondOperand").value;
 
-        document.getElementById("result").value = operation(parseInt(firstOperand), parseInt(secondOperand));
+        let result = operation(parseInt(firstOperand), parseInt(secondOperand));
+        displayResult(result);
     }
 
     let unaryOperation = (operation) => {
         let firstOperand = document.getElementById("firstOperand").value;
         disableSecondOperand();
-
-        document.getElementById("result").value = operation(parseInt(firstOperand));
+        
+        let result = operation(parseInt(firstOperand));
+        displayResult(result);
     }
+
+    let displayResult = (result) => {
+        if(isNaN(result)){
+            document.getElementById("smallResult").value = "not a number";
+                document.getElementById("result").value = "results starting with 10^21 will be shown using scientific notation, anything above 10^1000 will be treated as infinity";
+        } else{
+            if (result < Math.pow(10,21)){                
+                document.getElementById("smallResult").value = result.toLocaleString();
+                document.getElementById("result").value = "results starting with 10^21 will be shown using scientific notation, anything above 10^1000 will be treated as infinity";
+            }
+            else {                
+                document.getElementById("smallResult").value = result.toString();
+                document.getElementById("result").value = result.toLocaleString();
+            }
+        }
+    }
+
 
 
     let disableSecondOperand = () => {
